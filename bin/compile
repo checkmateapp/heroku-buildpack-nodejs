@@ -130,7 +130,9 @@ list_node_config | output "$LOG_FILE"
 create_build_env
 
 ### Configure package manager cache directories
-[ ! "$YARN_CACHE_FOLDER" ] && YARN_CACHE_FOLDER=$(mktemp -d -t yarncache.XXXXX)
+# [ ! "$YARN_CACHE_FOLDER" ] && YARN_CACHE_FOLDER=$(mktemp -d -t yarncache.XXXXX)
+YARN_CACHE_FOLDER=$CACHE_DIR/yarn-cache
+
 [ ! "$NPM_CONFIG_CACHE" ] && NPM_CONFIG_CACHE=$(mktemp -d -t npmcache.XXXXX)
 export YARN_CACHE_FOLDER NPM_CONFIG_CACHE
 
