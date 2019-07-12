@@ -88,11 +88,15 @@ yarn_node_modules() {
 
   echo "Installing node modules (yarn.lock)"
   cd "$build_dir" || return
-  monitor "yarn-install" yarn install --production="$production" --frozen-lockfile --ignore-engines --cache-folder "$YARN_CACHE_FOLDER" 2>&1
+  monitor "yarn-install" yarn install --production="$production" --frozen-lockfile --cache-folder "$YARN_CACHE_FOLDER" 2>&1
 }
 
 yarn_prune_devdependencies() {
   local build_dir=${1:-} 
+
+  echo "We always skip pruning because we don't ever want to do it until the end of the build"
+  meta_set "skipped-prune" "true"
+  return 0
 
   if [ "$NODE_ENV" == "test" ]; then
     echo "Skipping because NODE_ENV is 'test'"
